@@ -60,6 +60,7 @@ public class GroceryManagement {
      * @param stocks array of item stock counts, parallel to {@code names}
      * @param target the name of the item to restock
      * @param amount the quantity to add to the item's current stock
+     * @author Yubraj Bajagain
      */
     public static void restockItem(String[] names, int[] stocks, String target, int amount) {
         boolean found = false;
