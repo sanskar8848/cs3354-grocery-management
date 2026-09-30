@@ -168,24 +168,41 @@ public class GroceryManagement {
                     }
                     restockItem(itemNames, itemStocks, target, amount);
                     break;
-
+            
+                // Case 3: Add a new item to the inventory.
                 case 3:
                     System.out.print("Enter new item name: ");
                     String newName = scanner.nextLine().trim();
-                    System.out.print("Enter price: ");
-                    double newPrice;
-                    System.out.print("Enter initial stock: ");
-                    int newStock;
-                    try {
-                        newPrice = Double.parseDouble(scanner.nextLine().trim());
-                        newStock = Integer.parseInt(scanner.nextLine().trim());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid price or stock value.\n");
+
+                    if (newName.isEmpty()) {
+                        System.out.println("Item name cannot be empty.");
                         break;
                     }
+
+                    double newPrice;
+                    int newStock;
+
+                    try {
+                        System.out.print("Enter price: ");
+                        newPrice = Double.parseDouble(scanner.nextLine().trim());
+
+                        System.out.print("Enter initial stock: ");
+                        newStock = Integer.parseInt(scanner.nextLine().trim());
+
+                        if (newPrice < 0 || newStock < 0) {
+                            System.out.println("Price and stock cannot be negative.");
+                            break;
+                        }
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid price or stock value.");
+                        break;
+                    }
+
                     addItem(itemNames, itemPrices, itemStocks, newName, newPrice, newStock);
                     break;
 
+                // Case 4: Exit the program and close the scanner.
                 case 4:
                     System.out.println("Exiting program. Goodbye!");
                     scanner.close();
