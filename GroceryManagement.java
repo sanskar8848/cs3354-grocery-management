@@ -47,36 +47,33 @@ public class GroceryManagement {
         System.out.println("------------------------------\n");
     }
 
-    /**
-     * Restocks an existing item by adding the given amount to its stock.
-     * <p>
-     * Searches the {@code names} array for {@code target}. If found, the
-     * corresponding index in the {@code stocks} array is increased by
-     * {@code amount}. If the item is not found after checking the entire
-     * array, a message is printed to notify the user.
-     * </p>
-     *
-     * @param names  array of item names
-     * @param stocks array of item stock counts, parallel to {@code names}
-     * @param target the name of the item to restock
-     * @param amount the quantity to add to the item's current stock
-     */
-    public static void restockItem(String[] names, int[] stocks, String target, int amount) {
-        boolean found = false;
-
-        for (int i = 0; i < names.length; i++) {
-            if (names[i] != null && names[i].equalsIgnoreCase(target)) {
-                stocks[i] += amount;
-                System.out.println(target + " restocked. New stock: " + stocks[i]);
-                found = true;
-                break;
+/**
+ * Adds a positive quantity to an existing item's stock.
+ * Prints a message if the item is missing or the amount is invalid.
+ *
+ * @param names  array of item names
+ * @param stocks array of stock quantities
+ * @param target name of the item to restock
+ * @param amount positive quantity to add
+ * @author Yubraj Bajagain
+ */
+public static void restockItem(String[] names, int[] stocks,
+                               String target, int amount) {
+    for (int i = 0; i < names.length; i++) {
+        if (names[i] != null && names[i].equalsIgnoreCase(target)) {
+            if (amount <= 0) {
+                System.out.println("Restock amount must be greater than zero.");
+                return;
             }
-        }
 
-        if (!found) {
-            System.out.println("Item not found.");
+            stocks[i] += amount;
+            System.out.println(names[i] + " restocked. New stock: " + stocks[i]);
+            return;
         }
     }
+
+    System.out.println("Item not found.");
+}
 
     /**
      * Adds a new item to the first available (null) slot in the arrays.
